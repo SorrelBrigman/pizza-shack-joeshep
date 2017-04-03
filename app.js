@@ -3,6 +3,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const path = require('path');
 const app = express();
 const routes = require('./routes/')
 
@@ -10,7 +11,7 @@ const port = process.env.PORT || 3000
 
 //pug configuration
 app.set('view engine', 'pug');
-
+app.set('views', path.join(__dirname, '/myviews'))
 
 app.locals.company ="🍕Pizza Shack"
 app.locals.body = {};
