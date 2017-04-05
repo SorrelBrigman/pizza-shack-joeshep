@@ -20,6 +20,17 @@ block content
         //- if errors.name
         //-   span.help-block= errors.name.message
       .form-group(class={'has-error': errors.phone})
+        .label.control-label(for='email') Email
+        input.form-control#email(
+          type='email'
+          name='email'
+          placeholder='me@bob.com'
+          value=body.email
+          required
+        )
+        //- if errors.phone
+        //-   span.help-block= errors.phones.message
+      .form-group(class={'has-error': errors.phone})
         .label.control-label(for='phone') Phone Number
         input.form-control#phone(
           type='tel'
@@ -48,8 +59,8 @@ block content
             input(
             type='checkbox'
             name='toppings'
-            value=toppings.name
-            selected=(body.toppings && body.toppings.includes(toppings.name))
+            value=topping.name
+            selected=(body.toppings && body.toppings.includes(topping.name))
             )
         //- if errors.toppings
         //-   span.help-block= errors.toppings.message

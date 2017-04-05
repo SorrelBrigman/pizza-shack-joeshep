@@ -18,28 +18,27 @@ const getSizes = () =>
 module.exports.create = ({body}, res, err)=>{
   console.log('body', body)
   Order.forge(body)
-  //save stuff from form
   .save()
-  //once that works, show success message
+
   .then((orderObj)=> {
     console.log('orderObj', orderObj);
     res.render('index', {orderMsg: "Thanks for your order!"});
   })
   //if it doesn't work
-  .catch(({errors})=>{
+  .catch(({err})=>{
 
     return Promise.all([
       //resolve that promise with errors
-      Promise.resolve(errors),
+      Promise.resolve(err),
       //go get the sizes and toppings again
       getSizes(),
       getToppings()
       ])
   })
   //get the data from all of the resolves (errors, getSizes and getToppings)
-  .then(([errors, sizes, toppings])=> {
+  .then(([err, sizes, toppings])=> {
     //body contains the input information, so we can repopulate the form
-    res.render('order', {page: 'Order', sizes, toppings, errors, body})
+    res.render('order', {page: 'Order', sizes, toppings, err, body})
   })
   .catch(err);
  }

@@ -18,6 +18,7 @@ app.locals.company ="🍕Pizza Shack"
 app.locals.body = {};
 app.locals.errors = {};
 app.locals.body.magic = "Fooooo!"
+// app.locals.orderMsg
 
 
 //middlewares
