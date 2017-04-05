@@ -2,8 +2,8 @@
 exports.up = function(knex, Promise) {
   return knex.schema
     .createTable('contacts', (table)=>{
-      table.increments('contact_id').primary();
-      table.string('contact_name').notNullable();
+      table.increments();
+      table.string('contact_name').notNullable().unique();
       table.string('contact_email').notNullable();
       table.string('contact_phone').notNullable();
       table.string('contact_message').notNullable();
