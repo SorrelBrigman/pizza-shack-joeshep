@@ -13,16 +13,16 @@ router.use(require('./root'))
 // login guard middleware Send them back home if not register
 //TODO: define isAuthenticated
 
-router.use((req, res, next)=>{
-  if(req.isAuthenticated()){
-    next();
-  } else {
-    res.redirect('/login')
-  }
-})
+// router.use((req, res, next)=>{
+//   if(req.isAuthenticated()){
+//     next();
+//   } else {
+//     res.redirect('/login')
+//   }
+// })
 
 //private routes
 // router.use(require('./logout'))
-// router.use(require('./order'))
+router.use(require('./order'))
 
 module.exports = router;

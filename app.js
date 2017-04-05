@@ -16,6 +16,7 @@ app.set('views', path.join(__dirname, '/myviews'))
 
 app.locals.company ="🍕Pizza Shack"
 app.locals.body = {};
+app.locals.errors = {};
 app.locals.body.magic = "Fooooo!"
 
 

@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
       table.string('name').notNullable();
       table.string('email').notNullable();
       table.string('phone').notNullable();
-      table.integer('size_id').notNullable();
+      table.string('size').notNullable();
       table.specificType('toppings', knex.raw('text[]')).notNullable().defaultTo('{"cheese"}');
     })
 };
