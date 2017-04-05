@@ -6,6 +6,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const routes = require('./routes/')
+const bodyParser = require('body-parser')
 
 const port = process.env.PORT || 3000
 
@@ -20,6 +21,8 @@ app.locals.body.magic = "Fooooo!"
 
 //middlewares
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended: false}))
+
 app.use(routes)
 
 // app.get('/contact', (req, res, next)=>{

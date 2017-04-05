@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
   return knex.schema
     .createTable('toppings', (table)=>{
       table.increments();
-      table.string('topping_name').notNullable().unique();
+      table.string('name').notNullable().unique();
     })
 };
 
