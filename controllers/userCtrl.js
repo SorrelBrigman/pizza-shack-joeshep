@@ -19,7 +19,7 @@ module.exports.create = ({body: {email, password, confirmation}}, res) => {
         res.redirect('/');
       })
       //catch for the save
-      .catch((err)=> res.render('register', {msg: `Dang. There was a problem. Try again.`, page: 'Register'}))
+      .catch((err)=> res.render('register', {msg: `Dude. There was a problem. Try again.`, page: 'Register'}))
     })
     //catch for the findOneByEmail
     .catch((err)=> res.render('register', {msg: `Dang. There was a problem. Try again.`, page: 'Register'}));

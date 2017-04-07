@@ -15,13 +15,15 @@ const getSizes = () =>
   });
 
 
-module.exports.create = ({body, flash}, res, err)=>{
-  console.log('body', body)
-  Order.forge(body)
+module.exports.create = (req, res, err)=>{
+  console.log('body', req.body)
+  const toppings = req.body.toppings;
+  req.body.toppings = toppings && typeof(toppings) == 'string' ? [toppings] : toppings;
+  Order.forge(req.body)
   .save()
 
   .then((orderObj)=> {
-    flash('orderMsg', 'Thanks for your order')
+    req.flash('orderMsg', 'Thanks for your order')
     res.redirect('/');
   })
   //if it doesn't work
@@ -37,6 +39,7 @@ module.exports.create = ({body, flash}, res, err)=>{
     //get the data from all of the resolves (errors, getSizes and getToppings)
     .then(([err, sizes, toppings])=> {
       //body contains the input information, so we can repopulate the form
+      let body = req.body;
       res.render('order', {page: 'Order', sizes, toppings, err, body})
     })
   })

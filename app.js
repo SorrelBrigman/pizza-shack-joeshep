@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser');
 const flash = require('express-flash');
 const session = require('express-session')
 const {red, cyan} = require('chalk');
-const {passport} = require('passport');
+const  passport  = require('passport');
 const KnexSessionStore = require('connect-session-knex')(session);
 const { knex } = require('./db/database');
 
@@ -44,20 +44,24 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'pizzashacksupersecretkey'
 }));
 
+//reauthenticates user on every request
+require('./lib/passport-strategies')
+app.use(passport.initialize())
+app.use(passport.session())
+
+//adding an anymous fuct to middleware
+app.use((req, res, next) => {
+  //setting up true or false
+  app.locals.email = req.user && req.user.email
+  next()
+})
+
+
+
+
 app.use(express.static('public'));
 app.use(routes)
 
-// app.get('/contact', (req, res, next)=>{
-//   res.render('contact', {page: 'Contact'});
-// })
-
-// app.get('/login', (req, res, next)=>{
-//   res.render('login', {page: 'Login'});
-// })
-
-// app.get('/register', (req, res, next)=>{
-//   res.render('register', {page: 'register'});
-// })
 
 app.use((req, res)=>{
   res.render('404');

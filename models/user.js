@@ -9,7 +9,7 @@ const User = bookshelf.Model.extend(
   //these are instance methods:
   tableName: 'customers',
   bcrypt: {field: 'password'},
-  comparePass : function (passwordStr) {
+  comparePassword : function (passwordStr) {
     console.log("password String from user", passwordStr);
     console.log('user', this.attributes);
     //take in the password that the user typed on the form, and
@@ -26,7 +26,7 @@ const User = bookshelf.Model.extend(
         return user;
       })
       .catch(()=>{
-        consol.log('yep, this happends when no email');
+        console.log('yep, this happends when no email');
         return (null);
       })
     }
