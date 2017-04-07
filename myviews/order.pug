@@ -1,14 +1,13 @@
 extends partials/layout.pug
 
 block content
-  //- if errors
-  //-   each err in errors
-  //-     h1= err.message
+  if errors.column
+    h3 Sorry, there was a problem with the #{errors.column} field. Please try again.
   .heading
     h1 Order
   .order-form
     form(method="POST")
-      .form-group(class={'has-error': errors.name})
+      .form-group(class={'has-error': errors.column === 'name'})
         label.control-label(for='name') Name
         input.form-control#name(
           type='text'
@@ -17,9 +16,9 @@ block content
           value=body.name
           required
         )
-        //- if errors.name
-        //-   span.help-block= errors.name.message
-      .form-group(class={'has-error': errors.phone})
+
+
+      .form-group(class={'has-error': errors.column === 'phone'})
         .label.control-label(for='email') Email
         input.form-control#email(
           type='email'
@@ -28,9 +27,8 @@ block content
           value=body.email
           required
         )
-        //- if errors.phone
-        //-   span.help-block= errors.phones.message
-      .form-group(class={'has-error': errors.phone})
+
+      .form-group(class={'has-error': errors.column === 'phone'})
         .label.control-label(for='phone') Phone Number
         input.form-control#phone(
           type='tel'
@@ -39,9 +37,8 @@ block content
           value=body.phone
           required
         )
-        //- if errors.phone
-        //-   span.help-block= errors.phones.message
-      .form-group(class={'has-error': errors.size})
+
+      .form-group(class={'has-error': errors.column === 'size'})
         label.control-label(for='size') Size
         select.form-control#size(name='size' required)
           option(disabled selected) Select a size:
@@ -50,9 +47,8 @@ block content
             value=size.inches
             selected=(+body.size === +size.inches)
           ) #{size.name}: #{size.inches}
-        //- if errors.size
-        //-   span.help-block= errors.size.message
-      #toppings(class={'has-error': errors.toppings})
+
+      #toppings(class={'has-error': errors.column === 'toppings'})
         h5 Toppings
         each topping in toppings
           label= topping.name
@@ -62,8 +58,7 @@ block content
             value=topping.name
             selected=(body.toppings && body.toppings.includes(topping.name))
             )
-        //- if errors.toppings
-        //-   span.help-block= errors.toppings.message
+
       .order-form__submit
         a.btn.btn-danger.btn-lg(href='/') Cancel
         input.btn.btn-success.btn-lg(type='submit' value='Order it!')
